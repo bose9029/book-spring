@@ -1,12 +1,10 @@
 package com.aivle.bookapp.controller;
 
+
 import com.aivle.bookapp.domain.Book;
 import com.aivle.bookapp.services.BookService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,4 +25,20 @@ public class BookController {
     public Book BookDetail(@PathVariable Long id) {
         return bookService.getBookDetail(id);
     }
+}
+    // 도서 키워드 검색 ( 키워드 없을 시 전체 조회 )
+    @GetMapping
+    public List<Book> getBooks(@RequestParam(required = false) String q) {
+        if (q == null || q.trim().isEmpty()) {
+            return bookService.getBookList();
+        }
+        return bookService.searchBooks(q);
+    }
+
+    // 도서 조회하기
+    @PatchMapping("/{id}/views")
+    public Book increaseViewCount(@PathVariable Long id) {
+        return bookService.increaseViewCount(id);
+    }
+
 }
