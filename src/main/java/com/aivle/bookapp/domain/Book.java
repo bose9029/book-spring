@@ -47,6 +47,5 @@ public class Book {
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
     }
-  
-  
+
 }

@@ -28,28 +28,31 @@ public class BookController {
     public Book BookDetail(@PathVariable Long id) {
         return bookService.getBookDetail(id);
     }
-  
-    @DeleteMapping("/books/{id}")
+
+    // 도서 삭제 DELETE /books/{id}
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> BookDelete(@PathVariable Long id){
         bookService.deleteBook(id);
         return ResponseEntity.noContent().build();
 
     }
 
-    @PostMapping("/books")
+    // 도서 등록 POST /books
+    @PostMapping
     public ResponseEntity<Book> BookCreate(@Valid @RequestBody Book book){
         Book saved = bookService.create(book);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
-    @PatchMapping("/books/{id}")
+    // 도서 수정 POST /books/{id}
+    @PatchMapping("/{id}")
     public Book BookUpdate(@PathVariable Long id, @RequestBody Book book){
         return bookService.update(id, book);
     }
   
-    // 도서 키워드 검색 ( 키워드 없을 시 전체 조회 )
-    @GetMapping
+    // 도서 키워드 검색 GET /books q?=
+    @GetMapping("/search")
     public List<Book> getBooks(@RequestParam(required = false) String q) {
         if (q == null || q.trim().isEmpty()) {
             return bookService.getBookList();
@@ -57,7 +60,7 @@ public class BookController {
         return bookService.searchBooks(q);
     }
 
-    // 도서 조회하기
+    // 도서 조회하기 Patch
     @PatchMapping("/{id}/views")
     public Book increaseViewCount(@PathVariable Long id) {
         return bookService.increaseViewCount(id);
