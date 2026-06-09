@@ -2,11 +2,7 @@ package com.aivle.bookapp.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,27 +11,31 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Book {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    @NotBlank
     private String title;
 
+    @Column(nullable = false)
+    @NotBlank
     private String author;
 
+    @Column(nullable = false, columnDefinition = "TEXT")
+    @NotBlank
     private String content;
-
+    
     private String genre;
 
+
+    @Column(columnDefinition = "LONGTEXT")
+    private String coverImageUrl;
     private Integer views;
-
-    private String imageUrl;
-
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
-
+    
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
@@ -47,4 +47,6 @@ public class Book {
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
     }
+  
+  
 }
