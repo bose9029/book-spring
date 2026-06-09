@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
+            List<Book> findByTitleContainingOrAuthorContainingOrContentsContaining(
             String title,
             String author,
             String contents
