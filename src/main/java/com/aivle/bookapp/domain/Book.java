@@ -27,8 +27,9 @@ public class Book {
     @NotBlank
     private String content;
 
-    private String genre;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "genre_id", nullable = false)
+    private Genre genre;
 
     @Column(columnDefinition = "LONGTEXT")
     private String coverImageUrl;
@@ -36,7 +37,9 @@ public class Book {
     private Integer likes;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    
+
+
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
