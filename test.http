@@ -31,7 +31,25 @@ Content-Type: application/json
 GET http://localhost:8080/genres/9/books
 
 ### 책 검색
-GET http://localhost:8080/books/search?keyword=해리
+GET http://localhost:8080/books/search?q=해리
 
 ### 책 삭제
 GET http://localhost:8080/books/999
+
+### 정상 검색 - 제목 매칭 (해리포터 1권 나와야)
+GET http://localhost:8080/books/search?q=해리
+
+### 저자 검색 (한강 → 채식주의자)
+GET http://localhost:8080/books/search?q=한강
+
+### 내용 검색 (content에 있는 단어, 예: 판타지)
+GET http://localhost:8080/books/search?q=판타지
+
+### 부분 일치 (자 → 자바의 정석 등 '자' 포함된 것들)
+GET http://localhost:8080/books/search?q=자
+
+### 결과 없는 검색 (빈 배열 [] 나와야)
+GET http://localhost:8080/books/search?q=존재하지않는책제목xyz
+
+### 빈 키워드 (전체 목록 반환되어야)
+GET http://localhost:8080/books/search?q=
