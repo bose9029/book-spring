@@ -3,7 +3,7 @@ package com.aivle.bookapp.dto.book.response;
 import com.aivle.bookapp.domain.Book;
 
 public record BookResponse(
-        Long id, String title, String author,
+        Long id, String title, String author, String content,
         String genre, String coverImageUrl, Integer views, Integer likes
 ) {
     public static BookResponse from(Book book) {
@@ -11,6 +11,7 @@ public record BookResponse(
                 book.getId(),
                 book.getTitle(),
                 book.getAuthor(),
+                book.getContent(),
                 book.getGenre().getName(),
                 book.getCoverImageUrl(),
                 book.getViews(),
