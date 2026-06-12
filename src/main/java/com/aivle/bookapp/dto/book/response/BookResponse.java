@@ -5,7 +5,7 @@ import com.aivle.bookapp.domain.Book;
 import java.time.LocalDateTime;
 
 public record BookResponse(
-        Long id, String title, String author,
+        Long id, String title, String author, String content,
         String genre, String coverImageUrl, Integer views, Integer likes,
         LocalDateTime createdAt, LocalDateTime updatedAt
 ) {
@@ -14,6 +14,7 @@ public record BookResponse(
                 book.getId(),
                 book.getTitle(),
                 book.getAuthor(),
+                book.getContent(),
                 book.getGenre().getName(),
                 book.getCoverImageUrl(),
                 book.getViews(),
